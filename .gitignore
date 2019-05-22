@@ -1,2 +1,6 @@
 #python stuffs
 __pycache__/
+.py[cod]
+
+#c++ stuffs
+run
