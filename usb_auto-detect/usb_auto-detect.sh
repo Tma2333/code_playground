@@ -1,6 +1,7 @@
 #!/bin/bash
 # usb_auto-detect.bash
 
+
 for sysdevpath in $(find /sys/bus/usb/devices/usb*/ -name dev)
 do
 	syspath="${sysdevpath%/dev}"
