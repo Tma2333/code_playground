@@ -7,9 +7,9 @@ usb_dev_path = '/sys/bus/usb/devices/'
 
 parser = argparse.ArgumentParser(description='Search for all USB devices.')
 parser.add_argument('-l', '--list', action='store_true',
-                  help='showing list of all devices')
+                    help='showing list of all devices')
 parser.add_argument('-f', '--find', type=str, metavar = 'NAME',
-                  help='show all matching devices')
+                    help='show all matching devices')
 args = parser.parse_args()
 
 def usb_dev_list(out = False):
@@ -83,8 +83,8 @@ if args.list:
     usb_dev_list(out = True)
 if args.find:
     find_usb_dev(args.find, out = True)
-
-
+if args.list == False and args.find == None:
+    parser.print_help()
 
 
         
