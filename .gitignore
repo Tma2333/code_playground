@@ -7,3 +7,6 @@ run
 
 #notebook stuffs
 .ipynb_checkpoints/
+
+#test file
+test.*
