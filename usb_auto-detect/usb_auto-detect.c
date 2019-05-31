@@ -8,15 +8,16 @@
 #endif
 
 struct device{
-    char* devAddr;
+    char* devPath;
     char* devName;
     struct device* next;
 };
 
-void locUSBdev(const char dirp [1024], struct device *current){
+void _locUSBdev(const char dirp [1024], struct device *current){
     struct dirent *ent;
     DIR *dir;
-    char nextDir[1024];
+    FILE *uevent1, uevent2;
+    char nextDir[1024], uevent[1024], devEnt[64];
 
     if (!strstr(dirp, "/sys/bus/usb/dev/devices/usb")){
         if ((dir = opendir(dirp)) != NULL){
@@ -25,10 +26,27 @@ void locUSBdev(const char dirp [1024], struct device *current){
                     strcpy(nextDir, dirp);
                     strcat(nextDir, ent->d_name);
                     strcat(nextDir, "/");
-                    locUSBdev(nextDir, current);
+                    _locUSBdev(nextDir, current);
                 }
-                else if(strcmp(ent->d_name)){
-                
+                else if(strcmp(ent->d_name, "dev") == 0){
+                    strcpy(uevent, dirp);
+                    strcat(uevent, "uevent");
+                    uevent1 = fopen(uevent, "r");
+                    while (fscanf(fd, "%s", devEnt) != EOF){
+                        if (strncmp(devEnt, "DEVNAME=bus/",13) == 0) break;
+                        else if (strncmp(devEnt, "DEVNAME=", 9) == 0){
+                            char devP[128];
+                            strcpy(devP, "/dev/");
+                            strcpy(devP, strstr(devEnt, "DEVNAME="));
+                            current->devPath = devP;
+                            
+                            strcpy(uevent, dirp)
+                            strcat(uevent, "device/uevent")
+                        }
+                    }
+
+                    fclose(uevent1);
+                }
             }
         }
     }
