@@ -13,14 +13,6 @@ parser.add_argument('-f', '--find', type=str, metavar = 'NAME',
 args = parser.parse_args()
 
 def usb_dev_list(out = False):
-    """Search through USB busses and find all usb devices
-    
-    Keyword Arguments:
-        out {bool} -- enable output (default: {False})
-    
-    Returns:
-        list -- a [n, 2] list contain [[paths, ...], [names, ...]]
-    """
     dev_list = [[], []]
 
     for bus in os.listdir(usb_dev_path):
@@ -53,17 +45,6 @@ def usb_dev_list(out = False):
     return dev_list
 
 def find_usb_dev (dev_name, out = False):
-    """find specific pattern in all visible USB devices
-    
-    Arguments:
-        dev_name {str} -- Device name pattern
-    
-    Keyword Arguments:
-        out {bool} -- enable output (default: {False})
-    
-    Returns:
-        list -- a list of tuble contain [(matching path 1, matching name 1), ...]
-    """
     dev_list = usb_dev_list(False)
     index = []
     for i in range(len(dev_list[0])):
