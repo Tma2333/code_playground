@@ -31,6 +31,10 @@ def usb_dev_list(out = False):
                             if (key == 'DEVNAME') and ('bus' not in value):
                                 dev_path = os.path.join('/dev/', value)
                                 dev_list[0].append(dev_path)
+                                """we might want search for more device?
+                                   invistigat more device folder? sda ...
+                                   what about camera device? audio? charging?
+                                """
                                 with open(os.path.join(root, 'device', 'uevent')) as fd2:
                                     for param in fd2.readlines():
                                         param = param.strip().split('=')
