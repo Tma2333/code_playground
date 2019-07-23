@@ -25,14 +25,14 @@ class solution:
                         break
 
         return zigzag
-    
+    """
     def sol2(self, s, numRows):
         zigzag = ''
         if numRows == 0 or 1:
             return s
         
         for i in range(numRows):
-            
+    """           
 
 
 def test():
