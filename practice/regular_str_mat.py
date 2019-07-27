@@ -48,8 +48,20 @@ class solutions:
             return False
         return True
 
+    def isMatch(self, s, p):
+        if not p:
+            return not s
+        
+        match = bool(s) and p[0] in {s[0], '.'}
+
+        if len(p) >= 2 and p[1] == '*':
+            return match or self.isMatch(s, p[2:]) and self.isMatch(s[1:], p)
+        
+        return match and self.isMatch(s[1:], p[1:])
+
+
 sol = solutions()
-print(sol.sol1('aasdfasdb', '.*.*db'))
+print(sol.isMatch('a', 'ab'))
 
 
                 
