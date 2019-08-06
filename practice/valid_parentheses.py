@@ -26,6 +26,26 @@ class solutions:
             return False
 
         return True
+    
+    def sol2 (self, s):
+        if not s: 
+            return True
+        
+        keymap = {'}':'{',
+                  ']':'[',
+                  ')':'('}
+
+        stack = []
+        
+        for c in s:
+            if c in keymap:
+                a = stack.pop() if stack else '#'
+                if a != keymap[c]:
+                    return False
+            else:
+                stack.append(c)
+        
+        return not stack
 
 sol = solutions()
-print(sol.sol1('}'))
+print(sol.sol2('('))
