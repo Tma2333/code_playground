@@ -8,33 +8,26 @@ class ListNode:
 
 class solutions:
     def sol1(self, l1: ListNode, l2: ListNode):
-        cur = None
-        sudo_head = ListNode(None)
-        sudo_head.next = cur
+        cur = ListNode(None)
+        sudo_head = cur
 
-        while l1 != None and l2 != None:
+        while l1 != None or l2 != None:
             if l1 == None:
-                cur = l2
+                cur.next = l2
+                break
             if l2 == None:
-                cur = l1
+                cur.next = l1
+                break
 
             if l1.val <= l2.val:
-                print(1)
-                if cur:
-                    cur.next = l1
-                    cur = cur.next
-                else:
-                    cur = l1
+                cur.next = l1
+                cur = cur.next
 
                 l1 = l1.next
             elif l2.val < l1.val:
-                print(2)
-                if cur:
-                    cur.next = l2
-                    cur = cur.next
-                else:
-                    cur = l2
+                cur.next = l2
+                cur = cur.next
                 
                 l2 = l2.next
-        
+
         return sudo_head.next
